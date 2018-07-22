@@ -1,0 +1,43 @@
+[33mcommit cdda8304f0f8526a91a713edbf2ac28db5216780[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Merge: c63d5ae f59bb0c
+Author: Yeongmin Kim <copstyle86@gmail.com>
+Date:   Tue Jul 10 02:21:43 2018 +0900
+
+    Merge branch 'master' of https://gitlab.com/noel86/js-study
+
+[33mcommit c63d5aed0854a1db081e8c45dc48816ccf770d2f[m
+Author: Yeongmin Kim <copstyle86@gmail.com>
+Date:   Tue Jul 10 02:21:34 2018 +0900
+
+    edit
+
+[33mcommit f59bb0c630307018a15af1fcdb5147f34100ea64[m[33m ([m[1;31morigin/master[m[33m)[m
+Merge: c467209 cb7cd00
+Author: Yeongmin Kim <copstyle86@gmail.com>
+Date:   Tue Jul 10 02:06:56 2018 +0900
+
+    'edit'
+
+[33mcommit c467209cda8c48b70b39b19e6e55724d308d2e21[m
+Author: Yeongmin Kim <copstyle86@gmail.com>
+Date:   Tue Jul 10 02:05:28 2018 +0900
+
+    'let,const,tdz'
+
+[33mcommit cb7cd00d7e234d8b966e589aa761fd89c2d113ee[m
+Author: Yeongmin Kim <copstyle86@gmail.com>
+Date:   Tue Jul 10 01:39:29 2018 +0900
+
+    'var
+
+[33mcommit ac2893037430b9533c12f1d14b47cafb018d5749[m
+Author: Yeongmin Kim <copstyle86@gmail.com>
+Date:   Mon Jul 9 22:52:21 2018 +0900
+
+    var,let,const 차이점 볼 것
+
+[33mcommit 43825ba64a5ee4e3c933c9dd7cb56d0d0164d445[m
+Author: Yeongmin Kim <copstyle86@gmail.com>
+Date:   Mon Jul 9 22:50:29 2018 +0900
+
+    initial commit

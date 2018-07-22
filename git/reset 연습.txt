@@ -1,0 +1,19 @@
+리셋연습을 했다.
+
+방법을 남기려고 한다.
+
+처음에 내가 중간에 push 놈이 제대로 작동을 안했다.
+
+중간에 브런치를 따로 만들어서 작업했던 놈도 마찬가지.
+
+나에게 권한이 필요하다
+
+gitlab 에 option 중에 repositiory 옵션이 있는데 거기에서 git protect branch를 담당하고 있는 녀석을 unprotected로 해제시켜주었다.
+
+나는 git commit 을 -f 또는 origin +master와 같이 ' + ' 를 사용해서 강제로 덮어쓸 수 있게 되었다.
+
+그래서 모든 reset 후 push 그리고 실수했던 checkout 브런치를 만들어서 pull 받은다음 reset 후 push 해서 젱리 초기상태로 돌릴 수 있었다.
+
+그리고 남아있는 브런치까지 삭제하면 완벽하다.. 
+
+git branch -d <branchname>

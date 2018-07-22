@@ -1,0 +1,2 @@
+var 는 function-scoped이고, let, const는 block-scoped 입니다.
+function-scoped 와 block-scoped

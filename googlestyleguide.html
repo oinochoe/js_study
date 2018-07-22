@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+        // 구글 style guide 연습
+
+        // dont' use EVAL ..
+        // bad
+            let obj = { a: 20, b: 30 };
+            let propName = getPropName();  // returns "a" or "b"
+            eval('var result = obj.' + propName);
+        // good
+            let obj = { a: 20, b: 30 };
+            let propName = getPropName();  // returns "a" or "b"
+            let result = obj[propName];  //  obj[ "a" ] is the same as obj.a
+
+
+        // Constants는 underscores로 구분 된 ALL_UPPERCASE에 명명되어야합니다.
+        // Constant 이름은 CONSTANT_CASE를 사용합니다.단어는 모두 underscores로 구분하여 대문자로 모두 사용하십시오.
+        // 변수(variable)가 변경되지 않아야한다고 절대적으로 확신하는 경우, 상수(constant)의 이름을 대문자로 표시하여 이를 나타낼 수 있습니다. 
+        // 이렇게하면 상수(constant)의 불변성이 코드 전체에서 사용됨에 따라 명확 해집니다.
+        // 이 규칙의 주목할만한 예외는 상수(constant)가 함수 범위(function- scoped) 인 경우입니다.이 경우 camelCase로 작성해야합니다.
+        // bad
+        const number = 5;
+        // good
+        const NUMBER = 5;
+
+
+        // 선언(declaration) 당 하나의 변수(variable)
+        // 모든 지역 변수(local variable) 선언은 하나의 변수만(only one variable) 선언합니다.let a = 1, b = 2; 가 사용되지 않습니다.
+
+        // bad
+        let a = 1, b = 2, c = 3;
+        // good
+        let a = 1;
+        let b = 2;
+        let c = 3;
+        
+
+        // 팁: string에 작은 따옴표(single quotes) character가 포함되어 있으면 따옴표를 escape하지 않아도 되도록 template string을 사용하는 것이 좋습니다.
+        // bad
+        let directive = "No identification of self or mission."
+        // bad
+        let saying = 'Say it ain\u0027t so.';  // 정말 안좋은 예
+        // good
+        let directive = 'No identification of self or mission.';
+        // good
+        let saying = `Say it ain't so`;
+
+
+        
+    </script>
+</body>
+</html>
