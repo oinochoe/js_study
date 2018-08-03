@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>오직 html5로 그래프 출력</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/handsontable/5.0.0/handsontable.full.min.css">
+
+    <style>
+        .handsontable td,
+        .handsontable tr,
+        .handsontable th{border:0 !important;}
+
+        .handsontable th{background-color:#fff;}
+
+        .sans{font:0.8em sans-serif}
+    </style>
+</head>
+<body>
+
+<p>
+    Handsontable : 엑셀과 유사한 느낌을 주는 Javascript 스프레드 시트 라이브러리
+    2차원 테이블 형식의 데이터를 표현하기 위한 자유도가 높아 순위출력에 사용하기 적합
+
+    Jquery Slim : bootstrap 구동을 위한 라이브러리 jquery 라이브러리중에 슬림한 편
+
+</p>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handsontable/5.0.0/handsontable.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web-animations/2.3.1/web-animations.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/muuri/0.5.4/muuri.min.js"></script>
+
+
+    <div class="grid">
+        <div class="item">
+            <div class="item-content">
+                <h2>대한민국 도시 인구 순위</h2>
+                <div id="dragon">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const data = [{
+            city: '서울특별시',
+            value: 991,
+            percent: '<div class="progress"><div title="tooltip" class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 19.15%" aria-valuenow="19.15" aria-valuemin="0" aria-valuemax="100">19.15%</div></div>'
+        }, {
+            city: '부산광역시',
+            value: 348,
+            percent: '<div class="progress"><div title="tooltip" class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 6.72%" aria-valuenow="6.72" aria-valuemin="0" aria-valuemax="100">6.72%</div></div>'
+        }, {
+            city: '인천광역시',
+            value: 295,
+            percent: '<div class="progress"><div title="tooltip" class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 5.70%" aria-valuenow="5.70" aria-valuemin="0" aria-valuemax="100">5.70%</div></div>'
+        }, {
+            city: '전체',
+            value: 1234,
+            percent: '<div class="progress"><div title="tooltip" class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div></div>'
+        }];
+
+        let hot = new Handsontable(document.getElementById('dragon'),
+            {
+                data: data,
+                rowHeaders: true,
+                colWidths: [100, 100, 800],
+                colHeaders: false,
+                columns: [
+                    {data: "city", renderer: "numeric", className: "htMiddle sans", readOnly: true},
+                    {data: "value",renderer: "numeric", className: "htMiddle sans", readOnly: true},
+                    {data: "percent", renderer: "html", className: "htMiddle sans", readOnly: true}
+                    ]
+            });
+
+        let grid = new Muuri('.grid', {
+                dragEnabled: true,
+                dragContainer: document.body,
+                dragSort: function () {
+                return [grid]
+            }
+        });
+
+    </script>
+
+</body>
+</html>
