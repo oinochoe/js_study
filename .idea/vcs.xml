@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/jsProxy" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/pointer-events/my-custom-framework" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/react-mern-crud-example" vcs="Git" />
   </component>
 </project>
