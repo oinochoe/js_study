@@ -372,3 +372,219 @@ var obj = {
     'bar': 'b',
 }
 ```
+
+* method syntax 사용 [es6]
+
+```js
+//good
+const atom = {
+    value : 1,
+
+    addValue(value){
+        return atom.value + value;
+    }
+};
+
+//bad
+const atom = {
+    value : 1,
+    
+    addValue : function(value){
+        return atom.value + value;
+    }
+}
+```
+
+* 호이스팅 발생하는 함수 생성자  금지
+
+```js
+//good(1)
+function doSomething(param1, param2){
+    return param1 + param2;
+}
+
+//good(2)
+var doSomething = function(param1, param2){
+    return param1 + param2;
+};
+
+//good(3) - 이름있는 함수 표현식
+var doSomething = function doSomething(param1, param2){
+    return param1 + param2;
+};
+
+//good(4) - IIEF
+(function(){
+    ...
+})();
+
+//bad(1) - 함수 생성자
+var doSomething = new Function('param1', 'param2', 'return param1 + param2');
+
+//bad(2) - IIEF
+(function(){
+
+}()); // 여기서는 괄호가 좀 틀려.
+
+
+```
+
+* 화살표 함수 es6
+* 함수 표현식 대신에 화살표 함수 사용
+
+```js
+//good
+[1,2,3].map(x => {
+    const y = x + 1;
+    return x * y;
+});
+// 결과 - > (3)[2,6,12]
+
+//bad
+[1,2,3].map(function(x){
+    const y = x + 1;
+    return x * y;
+});
+//결과는 같지만 화살표 함수 권장이다.
+
+
+```
+
+* 함수의 본체가 하나의 식이면 중괄호를 생략하고 암시적 return을 이용할 수 있다.
+그외에는 return문을 명시해야함
+
+```js
+// good
+[1, 2, 3].map(number => {
+    const nextNumber = number + 1;
+    return `A string containing the ${nextNumber}.`;
+});
+
+//good
+[1, 2, 3].map(number => `A string containing the ${number}.`)
+
+//bad - 2줄 이상인데 return 문 없음
+[1, 2, 3].map(number => {
+    const nextNumber = number + 1;
+    `A string containng the ${nextNumber};`;
+});
+```
+
+* 함수의 인수가 하나인 경우 소괄호를 생략할 수 있따.
+
+```js
+//good
+[1, 2, 3].map(x => x * x);
+
+//good
+[1, 2, 3].reduce((y, x) => x + y);
+
+
+```
+
+# Destructuring ES6
+
+* 하나의 오브젝트에서 복수의 프로퍼티에 접근할 때는 Destructuring을 이용.
+
+```js
+//good
+function getFullName(obj){
+    const {firstName, lastName} = obj;
+
+    return `${firstName} ${lastName}`;
+}
+
+//BEST
+function getFullName({firstName, lastName}){
+    return `${firstName} ${lastName}`;
+}
+
+//bad
+function getFullName(user){
+    const firstName = user.firstName;
+    const lastName = user.lastName;
+
+    return `${firstName} ${lastName}`;
+    //destructuring을 사용하지 않은 것
+}
+```
+
+* 배열도 Destructuring이 가능하다.
+```js
+const arr = [1, 2, 3, 4];
+
+//good
+const [first, second] = arr;
+
+//bad
+const first = arr[0];
+const second = arr[1];
+```
+
+# 템플릿 문자열 es6
+
+* 프로그램에서 문자열을 생성하는 경우 template string를 이용한다.
+```js
+//good
+function sayHi(name) {
+    return `How are you, ${name}?`;
+}
+
+//bad
+function sayHi(name) {
+    return 'How are you, ' + name + '?';
+}
+
+//bad
+function sayHi(name) {
+    return ['How are you, ', name, '?'].join();
+}
+```
+
+#클래스와 생성자 ES6
+
+* class와 extends를 이용해서 객체 생성 및 상속 구현
+* mixin 제외, 명시적으로 prototype 호출 않는다.
+
+```js
+//good
+class Queue {
+    constructor(contents = []) {
+        this._queue = [...contents];
+    }
+    pop() {
+        const {value} = this._queue;
+        this._queue.splice(0, 1);
+        return value;
+    }
+}
+
+//bad
+function Queue(contents = []){
+    this._queue = [...contents];
+}
+Queue.prototype.pop = function(){
+    const value = this._queue[0];
+    this._queue.splice(0, 1);
+    return value;
+};
+
+//Good
+class PeekableQueue extends Queue{
+    peek() {
+        return this._queue[0];
+    }
+}
+
+//bad
+const inherits = require('inherits');
+function PeekableQueue(contents){
+    Queue.apply(this, contents);
+}
+inherits(PeekableQueue, Queue);
+PeekableQueue.prototype.peek = function() {
+    return this._queue[0];
+};
+
+
+```
