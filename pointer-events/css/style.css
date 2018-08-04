@@ -1,0 +1,44 @@
+@charset "UTF-8";
+.card {
+  max-width: 286px; }
+
+.btn {
+  pointer-events: auto;
+  /*
+    이게 핵심이네 = >
+    얘는 auto 이고 부모는 pointer-events가 none이라
+    부모에 hover 이벤트를 넣어놓고 btn에 이벤트가 작렬하면 생기는 거야.
+  */ }
+
+.change-parent-style {
+  pointer-events: none;
+  transition: border-color 0.15s ease-in-out; }
+  .change-parent-style:hover {
+    border-color: #0069d9; }
+
+.change-element-style {
+  pointer-events: none; }
+  .change-element-style:hover .element {
+    color: #28a745; }
+
+.btn-x {
+  pointer-events: none;
+  font-weight: 700;
+  border: none;
+  background-color: #e8e8e8;
+  border-radius: .2rem;
+  padding: .5em .8em;
+  cursor: pointer; }
+  .btn-x::after {
+    content: '×';
+    color: #dc3545;
+    pointer-events: auto; }
+  .btn-x:focus {
+    box-shadow: rgba(0, 123, 255, 0.25) 0px 0px 0px 0.2rem;
+    outline: 0; }
+
+.svg {
+  pointer-events: visiblePainted;
+  transition: fill .15s ease-in-out; }
+  .svg:hover {
+    fill: #fd7e14; }
