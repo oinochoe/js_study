@@ -1,0 +1,58 @@
+/* generate variable */
+div { color: #ff0000; }
+div span { color: #ff0000; }
+div.yeongmin { color: #ff0000; }
+div span div a { color: #ff0000; }
+
+/* import is available */
+h1 { color: #0000ff; }
+
+/* 
+mixin
+generator :  @mixin mixinName{}
+import :  @include mixinName{}
+*/
+.box { border: 1px #ff0000 #000; padding: 10px 9px 10px 8px; color: #0000ff; background-color: #00ff00; font-size: 18px; }
+
+.box2 { background-color: #eaeaea; font-weight: bolder; border: 1px #ff0000 #000; padding: 10px 9px 10px 8px; color: #0000ff; }
+
+.box3 { border: 1px #ff0000 #000; padding: 10px 9px 10px 8px; color: #0000ff; }
+
+/* 
+* parameter is available
+*/
+.box4 { background-color: #fff064; font-size: 10px; border: 10px solid #fff064; }
+
+/* 
+* set parameter value as base value.
+* The meaning of these codes is
+* `I will use color as value which i set while size as base value`
+* The most important thing that is a warning point is
+* prepositioning the value without any value.
+*/
+.box5 { background-color: #e97fe5; font-size: 24px; border: 24px solid #e97fe5; }
+
+.box6 { background-color: #8c8c8c; font-size: 12px; border: 12px solid #8c8c8c; }
+
+/* #EXTEND
+* Extend have two methods.
+* At first, you can use it at B that you used at A
+* Secondly, you can use it at B that you used at A, but only change some attributes.
+*/
+/* first */
+/* warning semicolones */
+.menu, .menu1, .menu2 { width: 200px; height: 100px; }
+
+/* second - only attributes */
+.menu2 { height: 50px; }
+
+.menu2 { color: green; }
+
+/* css compile style */
+/* nested - basic */
+/* expanded - expanded */
+/* compact - compacting */
+/* usage : sass --style compact index.scss index.css */
+/* Automation of transpiling sass --watch *.scss  : only written scss file. sass --watch --style *.scss : only written scss file sass --watch : all of scss file styled nested. sass --watch --style style species : all of scss file  to want to exit -> crtl + c */
+
+/*# sourceMappingURL=index.css.map */
