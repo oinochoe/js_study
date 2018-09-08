@@ -73,42 +73,58 @@
 <body>
 
     <ul class="menu">
-        <li data-target="#about"> 소개 </li>
-        <li data-target="#member"> 멤버 </li>
-        <li data-target="#contact"> 연락 </li>
+        <li class="btn js-btn"> 소개 </li>
+        <li class="btn js-btn"> 멤버 </li>
+        <li class="btn js-btn"> 연락 </li>
+        <li class="btn js-btn"> 사랑 </li>
     </ul>
 
     <section>
         <h1>특정엘리먼트로 부드럽게 스크롤</h1>
-        <article id="about">
+        <article class="section js-section">
             <h2>About</h2>
             <div>
                 안녕하세요 About 입니다.
             </div>
         </article>
-        <article id="member">
+        <article class="section js-section">
             <h2>member</h2>
             <div>
                 안녕하세요 member 입니다.
             </div>
         </article>
-        <article id="contact">
+        <article class="section js-section">
             <h2>contact</h2>
             <div>
                 안녕하세요 contact 입니다.
             </div>
         </article>
+        <article class="section js-section">
+            <h2>love</h2>
+            <div>
+                안녕하세요 love 입니다.
+            </div>
+        </article>
     </section>
-    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
+
     <script>
-        "use strict";
-        $(".menu li").on('click', function (e) {
-            e.preventDefault();
-            const scrollPosition = $($(this).data("target")).offset().top;
-            $("html, body").stop().animate({
-                scrollTop: scrollPosition
-            }, 500);
+        document.addEventListener("DOMContentLoaded", () => {
+            const btns = document.querySelectorAll('.js-btn');
+            const sections = document.querySelectorAll('.js-section');
+
+            for (let i = 0; i < btns.length; i++) {
+                btns[i].addEventListener('click', () => {
+                    scrollIt(sections[i]);
+                });
+            }
+
+            function scrollIt(element) {
+                window.scrollTo({
+                    'behavior': 'smooth',
+                    'left': 0,
+                    'top': element.offsetTop
+                });
+            }
         });
     </script>
 </body>
