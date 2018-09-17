@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Progress</title>
+    <style>
+    .progress {
+        display: block;
+        text-align: center;
+        width: 0;
+        height: 3px;
+        background: red;
+        transition: width .3s;
+    }
+    .progress.hide {
+        opacity: 0;
+        transition: opacity 1.3s;
+    }
+    </style>
+</head>
+<body>
+    <h1 class="text-center">jQuery: AJAX progress bar</h1>
+    <div class="progress"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script>
+        $(document).on('ready', function() {
+            var data = [];
+            for (var i = 0; i < 100000; i++) {
+                var tmp = [];
+                for (var i = 0; i < 100000; i++) {
+                    tmp[i] = 'hue';
+                }
+                data[i] = tmp;
+            };
+            $.ajax({
+                xhr: function () {
+                    var xhr = new window.XMLHttpRequest();
+                    //Upload progress
+                    xhr.upload.addEventListener("progress", function (evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            console.log(percentComplete);
+                            $('.progress').css({
+                                width: percentComplete * 100 + '%'
+                            });
+                            if (percentComplete === 1) {
+                                $('.progress').addClass('hide');
+                            }
+                        }
+                    }, false);
+                    //Download progress
+                    xhr.addEventListener("progress", function (evt) {
+                        if (evt.lengthComputable) {
+                            var percentComplete = evt.loaded / evt.total;
+                            console.log(percentComplete);
+                            $('.progress').css({
+                                width: percentComplete * 100 + '%'
+                            });
+                        }
+                    }, false);
+                    return xhr;
+                },
+                type: 'POST',
+                url: "/",
+                data: {},
+                success: function (data) {
+                    //do something success in
+                }
+            });
+        });
+    </script>
+</body>
+</html>
