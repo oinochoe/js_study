@@ -1,0 +1,121 @@
+/* generate variable */
+$red: #ff0000;
+div{
+color: $red;
+& span{
+    color : $red;
+}
+&.yeongmin{
+    color:$red;
+}
+& span & a{
+    color:$red;
+}
+}  
+/* import is available */
+@import 'index2.scss';
+h1{
+    color:$blue;
+}
+
+/* 
+mixin
+generator :  @mixin mixinName{}
+import :  @include mixinName{}
+*/
+@mixin boxStyle {
+    border: 1px $red #000;
+    padding: 10px 9px 10px 8px;
+    color:$blue;
+}
+
+.box{
+    @include boxStyle;
+    background-color: #00ff00;
+    font-size:18px;
+}
+.box2{
+    background-color: #eaeaea;
+    font-weight:bolder;
+    @include boxStyle;
+}
+.box3{
+    @include boxStyle;
+}
+/* 
+* parameter is available
+*/
+
+@mixin style1($color, $size){
+    background-color: $color;
+    font-size: $size;
+    border: $size solid $color;
+}
+
+.box4{
+@include style1(#fff064, 10px)
+}
+
+/* 
+* set parameter value as base value.
+* The meaning of these codes is
+* `I will use color as value which i set while size as base value`
+* The most important thing that is a warning point is
+* prepositioning the value without any value.
+*/
+
+@mixin style2($size, $color: #e97fe5) {
+    background-color: $color;
+    font-size: $size;
+    border: $size solid $color;
+}
+
+.box5{
+    @include style2(24px)
+}
+
+.box6{
+    @include style2(12px, #8c8c8c)
+}
+
+
+/* #EXTEND
+* Extend have two methods.
+* At first, you can use it at B that you used at A
+* Secondly, you can use it at B that you used at A, but only change some attributes.
+*/
+
+/* first */
+/* warning semicolones */
+.menu{
+    width: 200px;
+    height: 100px;
+}
+.menu1{
+    @extend .menu;
+}
+
+/* second - only attributes */
+%hehehe1{
+    height:50px;
+}
+.menu2{
+    @extend .menu;
+    @extend %hehehe1;
+    color:green;
+}
+
+/* css compile style */
+/* nested - basic */
+/* expanded - expanded */
+/* compact - compacting */
+/* usage : sass --style compact index.scss index.css */
+
+/*
+ * Automation of transpiling
+ * sass --watch *.scss  : only written scss file.
+ * sass --watch --style *.scss : only written scss file
+ * sass --watch : all of scss file styled nested.
+ * sass --watch --style style species : all of scss file 
+ * to want to exit -> crtl + c
+ */
