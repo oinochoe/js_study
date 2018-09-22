@@ -1,0 +1,132 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: Oswald;
+    font-weight: 300;
+    overflow: hidden;
+}
+
+.marker {
+    visibility: hidden;
+}
+
+.show-markers .marker {
+    visibility: visible;
+}
+
+.marker-target {
+    stroke-opacity: 0;
+}
+
+.show-markers .marker-target {
+    stroke-opacity: 1;
+}
+
+.instructions {
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+    background: #000;
+    color: #FFF;
+    font-family: monospace;
+    font-size: 12px;
+    padding: 0.5em;
+}
+
+#rightEye,
+#leftEye {
+    stroke: none;
+    stroke-opacity: 1;
+}
+
+#tRexLayer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+#tyrannoScrollus {
+    width: 500px;
+    height: 500px;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+    overflow-x: scroll;
+    position: absolute;
+    -webkit-overflow-scrolling: touch;
+}
+
+#background {
+    width: 850vw;
+    height: 100%;
+    background-image: linear-gradient(to right, black 10%, white 90%);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#words {
+    height: 500px;
+    position: relative;
+}
+
+#title {
+    color: black;
+    position: absolute;
+    font-size: 40pt;
+    top: 5pt;
+    width: 80vw;
+
+    right: 10vw;
+    text-align: center;
+}
+
+#link {
+    color: white;
+    position: absolute;
+    font-size: 20pt;
+    bottom: 10pt;
+    width: 100vw;
+    right: 0;
+    text-align: center;
+
+    a {
+        color: white;
+        background-color: #7bc7c4;
+        padding: .5rem 1rem;
+        text-decoration: none;
+    }
+}
+
+#sign {
+    color: white;
+    position: absolute;
+    font-size: 40pt;
+    left: calc(50vw + 139px);
+    top: calc(50% - 20pt);
+}
+
+.hidden-sm {
+    @media (max-width: 700px) {
+        display: none;
+    }
+}
+
+.origin {
+    fill: transparent;
+}
