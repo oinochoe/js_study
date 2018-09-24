@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>자바스크립트 실행속도 테스트</title>
+</head>
+
+<body>
+    <h1>자바스크립트 실행속도 테스트</h1>
+    <p>안녕하세요~~</p>
+    <p>안녕하세요~~2</p>
+    <p>안녕하세요~~3</p>
+    <script>
+        console.time('a');
+        let pList = document.querySelectorAll('p');
+        console.timeEnd('a');
+
+        console.time('b');
+        pList.forEach((elem) => {
+            elem.classList.add('foo');
+        });
+        console.timeEnd('b');
+    </script>
+</body>
+
+</html>
