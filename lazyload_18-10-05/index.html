@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lazy Loading</title>
+    <style>
+        html {
+            background: rgba(200, 200, 200, 0.3);
+            backface-visibility: hidden;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            font-weight: 100;
+            padding-top: 20px;
+            color: rgba(200, 200, 200, 1)
+        }
+
+        div {
+            width: 300px;
+            height: 300px;
+            margin: 150px auto;
+            position: relative;
+        }
+
+        div:after {
+            content: '';
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: rgba(200, 200, 200, 0.5);
+            transition: opacity 0.5s ease;
+        }
+
+        .loaded {
+            background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/tumblr_mrraktQTCS1st5lhmo1_1280.jpg");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .loaded:nth-of-type(2) {
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/tumblr_mufr0mmWYW1st5lhmo1_1280.jpg);
+        }
+
+        .loaded:nth-of-type(3) {
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/tumblr_mr80snx79b1st5lhmo1_1280.jpg);
+        }
+
+        .loaded:nth-of-type(4) {
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/tumblr_mrraktQTCS1st5lhmo1_1280.jpg);
+        }
+
+        .loaded:nth-of-type(5) {
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/tumblr_msuei3sMTo1st5lhmo1_1280.jpg);
+        }
+
+        .loaded:nth-of-type(6) {
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/tumblr_mtw7mhZsCe1st5lhmo1_1280.jpg);
+        }
+
+        .loaded:nth-of-type(7) {
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/tumblr_msuei3sMTo1st5lhmo1_1280.jpg);
+        }
+
+        .loaded:nth-of-type(8) {
+            background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/25381/tumblr_mufrlh9WqW1st5lhmo1_1280.jpg);
+        }
+
+        div.loaded:after {
+            opacity: 0;
+        }
+
+        .banner {
+            text-align: center;
+            padding: 1em 0.5em;
+            background: #fab1a0;
+            font-weight: 600;
+            /* color: #e17055 */
+        }
+    </style>
+</head>
+
+<body>
+    <aside class="banner">
+        ⚠️ Check out the updated version <a href="https://codepen.io/the_ruther4d/pen/mxMbqP/" target="_blank">here</a>
+    </aside>
+    <h1>Lazy Load for background Images</h1>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        var ll = $('div');
+        var lh = []
+        var wscroll = 0;
+        var wh = $(window).height();
+
+        function update_offsets() {
+            $('div').each(function () {
+                var x = $(this).offset().top;
+                lh.push(x);
+            });
+        };
+
+        function lazy() {
+            wscroll = $(window).scrollTop();
+            for (i = 0; i < lh.length; i++) {
+                if (lh[i] <= wscroll + (wh - 200)) {
+                    $('div').eq(i).addClass('loaded');
+                };
+            };
+        };
+
+        $(document).ready(function () {
+            // Page Load
+            update_offsets();
+            lazy();
+        });
+
+        $(window).on('scroll', function () {
+            lazy();
+        });
+    </script>
+</body>
+
+</html>
