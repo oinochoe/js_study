@@ -1,0 +1,11 @@
+/* main.scss */
+/* _config.scss */
+h1 {
+  color: blue;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
