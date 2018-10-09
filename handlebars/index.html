@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Handlebars</title>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="./handlebar.min.js"></script>
+    <!-- 핸들바 템플릿 -->
+    <script id="partial-template" type="text/x-handlebars-template">
+        {{!-- #unless 헬퍼는 #if 의 정반대 기능을 한다. --}}
+        <h1>{{title}} 리스트 {{#unless users}}<small>사용자 리스트가 없습니다.</small>{{/unless}}</h1>
+    </script>
+    
+    <!-- 핸들바 템플릿 -->
+    <script id="entry-template" type="text/x-handlebars-template">
+    {{!-- 
+    	조각 템플릿은 #> 를 사용해서 포함시킬 수 있다.
+      또, 해당 조각 템플릿에 특정 변수값을 전달할 수 있다. (예: title="사용자")
+      
+      partial template 로그 실패시 보여질 내용을 따로 지정하지 않는다면,
+      #> 이 아니라 > 만 사용해도 된다.
+    --}}
+    {{#> commonHeader title="사용자"}}
+        partial template 로드 실패시 보여지는 내용
+    {{/commonHeader}}
+    
+    {{!--
+    	인라인 조각 템플릿은 따로 등록할 필요가 없이 바로 사용 가능하다.
+    --}}
+    
+    {{#* inline "last"}}
+    	{{#if @last}}
+      (이게 마지막이네 ㅠㅠ)
+      {{/if}}
+    {{/inline}}
+    
+    <table>
+        <thead> 
+            <th>이름</th> 
+            <th>아이디</th> 
+            <th>메일주소</th> 
+            <th>요소정보</th>
+        </thead> 
+        <tbody> 
+            {{!-- {{#each users}} 는 {{#users}} 로도 대체 가능하다 --}}
+            {{#each users}} 
+            <tr> 
+                <td>{{name}} {{> last}}</td> 
+                <td>{{id}}</td> 
+                
+                {{!-- 사용자 정의 헬퍼인 email에 id를 인자로 넘긴다 --}}
+                <td><a href="mailto:{{email id}}">{{email id}}</a></td> 
+                
+                {{!-- 요소의 순번은 @index 혹은 @key로 잡을 수 있는데,
+                array와 object 모두 잡을 수 있는 key가 더 나아보인다 --}}
+                
+                {{#if @first}}
+                    <td>첫 아이템 ({{@key}} 번째 요소)</td>
+                {{else if @last}}
+                    <td>마지막 아이템 ({{@key}} 번째 요소)</td>
+                {{else}}
+                    <td>중간 아이템 ({{@key}} 번째 요소)</td>
+                {{/if}}
+            </tr> 
+            {{/each}}
+        </tbody> 
+    </table>
+    </script>
+
+    <script>
+        //핸들바 조각 템플릿 가져오기
+            var partial = $("#partial-template").html();
+
+            //핸들바 템플릿 가져오기
+            var source = $("#entry-template").html();
+
+            //핸들바 템플릿 컴파일
+            var template = Handlebars.compile(source);
+
+            //핸들바 템플릿에 바인딩할 데이터
+            var data = {
+                users: [
+                    { name: "홍길동1", id: "aaa1" },
+                    { name: "홍길동2", id: "aaa2" },
+                    { name: "홍길동3", id: "aaa3" },
+                    { name: "홍길동4", id: "aaa4" },
+                    { name: "홍길동5", id: "aaa5" }
+                ]
+            };
+
+            //조각 템플릿을 'commonHeader' 라는 이름으로 등록
+            Handlebars.registerPartial('commonHeader', partial);
+
+            //커스텀 헬퍼 등록 (id를 인자로 받아서 전체 이메일 주소를 반환)
+            Handlebars.registerHelper('email', function (id) {
+                return id + "@daum.net";
+            });
+
+            //핸들바 템플릿에 데이터를 바인딩해서 HTML 생성
+            var html = template(data);
+
+            //생성된 HTML을 DOM에 주입
+            $('body').append(html);
+    </script>
+</body>
+
+</html>
